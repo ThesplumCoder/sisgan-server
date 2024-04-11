@@ -1,13 +1,13 @@
-package com.uis.sisgan;
+package app.sisgan.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SisganApplication {
+public class SisganBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SisganApplication.class, args);
+		SpringApplication.run(SisganBackendApplication.class, args);
 	}
 
 }
