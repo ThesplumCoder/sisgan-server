@@ -5,7 +5,7 @@ import java.security.PrivateKey;
 public class Farmer extends User {
 
     private String mark;
-    private String farm_name;
+    private String farmName;
 
 
     public Farmer(String email, String password) {
@@ -21,11 +21,11 @@ public class Farmer extends User {
     }
 
     public String getFarmName() {
-        return farm_name;
+        return farmName;
     }
 
-    public void setFarmName(String farm_name) {
-        this.farm_name = farm_name;
+    public void setFarmName(String farmName) {
+        this.farmName = farmName;
     }
 
 }

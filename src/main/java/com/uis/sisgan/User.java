@@ -1,12 +1,12 @@
 package com.uis.sisgan;
 
 public abstract class User {
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String password;
-    private String birth_date;
+    private String birthDate;
     private String email;
-    private String id_card;
+    private String idCard;
 
     public User(String email ,String password) {
         this.email = email;
@@ -15,19 +15,19 @@ public abstract class User {
     }
 
     public String getFirstName() {
-        return first_name;
+        return firstName;
     }
 
     public void setFirstName(String first_name) {
-        this.first_name = first_name;
+        this.firstName = first_name;
     }
 
     public String getLastName() {
-        return last_name;
+        return lastName;
     }
 
     public void setLastName(String last_name) {
-        this.last_name = last_name;
+        this.lastName = last_name;
     }
 
     public String getPassword() {
@@ -39,11 +39,11 @@ public abstract class User {
     }
 
     public String getBirthDate() {
-        return birth_date;
+        return birthDate;
     }
 
     public void setBirthDate(String birth_date) {
-        this.birth_date = birth_date;
+        this.birthDate = birth_date;
     }
 
     public String getEmail() {
@@ -55,10 +55,10 @@ public abstract class User {
     }
 
     public String getIdCard() {
-        return id_card;
+        return idCard;
     }
 
     public void setIdCard(String id_card) {
-        this.id_card = id_card;
+        this.idCard = id_card;
     }
 }

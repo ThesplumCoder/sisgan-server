@@ -3,15 +3,15 @@ package com.uis.sisgan;
 import java.util.Date;
 
 public class Cattles {
-    private String id_user;
+    private String idUser;
     private Date birth_date;
 
     public String getIdUser() {
-        return id_user;
+        return idUser;
     }
 
-    public void setIdUser(String id_user) {
-        this.id_user = id_user;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     public Date getBirthDate() {
