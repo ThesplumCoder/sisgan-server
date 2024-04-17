@@ -14,19 +14,19 @@ public abstract class User {
 
     }
 
-    public String getFirst_name() {
+    public String getFirstName() {
         return first_name;
     }
 
-    public void setFirst_name(String first_name) {
+    public void setFirstName(String first_name) {
         this.first_name = first_name;
     }
 
-    public String getLast_name() {
+    public String getLastName() {
         return last_name;
     }
 
-    public void setLast_name(String last_name) {
+    public void setLastName(String last_name) {
         this.last_name = last_name;
     }
 
@@ -38,11 +38,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public String getBirth_date() {
+    public String getBirthDate() {
         return birth_date;
     }
 
-    public void setBirth_date(String birth_date) {
+    public void setBirthDate(String birth_date) {
         this.birth_date = birth_date;
     }
 
@@ -54,11 +54,11 @@ public abstract class User {
         this.email = email;
     }
 
-    public String getId_card() {
+    public String getIdCard() {
         return id_card;
     }
 
-    public void setId_card(String id_card) {
+    public void setIdCard(String id_card) {
         this.id_card = id_card;
     }
 }

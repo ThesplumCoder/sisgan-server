@@ -8,11 +8,11 @@ public class Driver extends User{
         super(email, password);
     }
 
-    public String getId_driving_license() {
+    public String getIdDrivingLicense() {
         return id_driving_license;
     }
 
-    public void setId_driving_license(String id_driving_license) {
+    public void setIdDrivingLicense(String id_driving_license) {
         this.id_driving_license = id_driving_license;
     }
 

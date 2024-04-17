@@ -20,11 +20,11 @@ public class Farmer extends User {
         this.mark = mark;
     }
 
-    public String getFarm_name() {
+    public String getFarmName() {
         return farm_name;
     }
 
-    public void setFarm_name(String farm_name) {
+    public void setFarmName(String farm_name) {
         this.farm_name = farm_name;
     }
 

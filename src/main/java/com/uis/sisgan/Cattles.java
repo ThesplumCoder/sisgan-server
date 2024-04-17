@@ -6,19 +6,19 @@ public class Cattles {
     private String id_user;
     private Date birth_date;
 
-    public String getId_user() {
+    public String getIdUser() {
         return id_user;
     }
 
-    public void setId_user(String id_user) {
+    public void setIdUser(String id_user) {
         this.id_user = id_user;
     }
 
-    public Date getBirth_date() {
+    public Date getBirthDate() {
         return birth_date;
     }
 
-    public void setBirth_date(Date birth_date) {
+    public void setBirthDate(Date birth_date) {
         this.birth_date = birth_date;
     }
 
