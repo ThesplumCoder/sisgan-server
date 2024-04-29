@@ -1,17 +1,57 @@
-package com.uis.sisgan;
+package com.uis.sisgan.persistence.entity;
 
+import jakarta.persistence.*;
+
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name="users")
 public abstract class User {
+
+
+    @GeneratedValue
+    @Id
+    @Column(name = "id_user")
+    private String userId;
+
+    @Column(name="id_card")
+    private String cardId;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+
     private String password;
-    private String birthDate;
+
+    @Column(name= "birth_date")
+    private Date birthDate;
+    
     private String email;
-    private String idCard;
+
+    
+    
 
     public User(String email ,String password) {
         this.email = email;
         this.password = password;
 
+    }
+
+    public User() {
+
+    }
+
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -38,11 +78,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birth_date) {
+    public void setBirthDate(Date birth_date) {
         this.birthDate = birth_date;
     }
 
@@ -54,11 +94,14 @@ public abstract class User {
         this.email = email;
     }
 
-    public String getIdCard() {
-        return idCard;
-    }
 
-    public void setIdCard(String id_card) {
-        this.idCard = id_card;
+    @OneToMany(mappedBy = "users")
+    private List<Rol> roles;
+
+    public String getCardId() {
+        return cardId;
+    }
+    public void setCardId(String id_card) {
+        this.cardId = id_card;
     }
 }

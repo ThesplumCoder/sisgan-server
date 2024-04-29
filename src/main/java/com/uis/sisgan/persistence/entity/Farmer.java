@@ -1,10 +1,22 @@
-package com.uis.sisgan;
+package com.uis.sisgan.persistence.entity;
 
-import java.security.PrivateKey;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+import java.util.List;
 
 public class Farmer extends User {
 
+
     private String mark;
+
+
+    @OneToMany(mappedBy = "users")
+    private List<Cattle> cattles;
+
+    @Column(name="farm_name")
     private String farmName;
 
 
