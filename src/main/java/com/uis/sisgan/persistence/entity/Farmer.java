@@ -12,7 +12,8 @@ public class Farmer extends User {
 
     private String mark;
 
-
+    @Column(name="id_cattle")
+    private String cattleId;
     @OneToMany(mappedBy = "users")
     private List<Cattle> cattles;
 
