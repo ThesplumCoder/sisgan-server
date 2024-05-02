@@ -14,7 +14,7 @@ public class CattleRepository{
     /*
         Se llama el Metodo y se configura que es lo que debe hacer
         Asi nos ahorramos muchas lineas de codigo y es eficiente
-        
+
      */
 
     public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed){

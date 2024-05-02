@@ -3,7 +3,6 @@ package com.uis.sisgan.persistence.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "internal_movement_guides")
@@ -24,6 +23,7 @@ public class InternalMovementGuide {
     @Column(name = "origin")
     private String origin;
 
+    @Column(name= "destination")
     private String destination;
 
     @Column(name="signature_petitioner")
@@ -44,6 +44,7 @@ public class InternalMovementGuide {
     @ManyToOne
     @JoinColumn(name ="id_driving_license",insertable = false,updatable = false )
     private Driver drivers;
+
 
     public Integer getInternalMovementGuideId() {
         return internalMovementGuideId;

@@ -11,6 +11,12 @@ import java.util.List;
 public class Cattle {
 
 
+    /*
+            Es la Entidad de la base de datos
+            en todos sus campos contiene getters and setters
+
+     */
+
     @Id
     @GeneratedValue
     @Column(name="id_cattle")
@@ -20,10 +26,20 @@ public class Cattle {
 
     @Column(name= "birth_date")
     private Date birthDate;
-    
+
+    @Column(name= "weight")
     private Float weight;
+
+    @Column(name= "sex")
     private String sex;
+
+    @Column(name= "breed")
     private String breed;
+
+    /*
+            Configuracion de llaves primarias y conexiones entre tablas
+            de la base de datos
+     */
 
     @ManyToOne
     @JoinColumn(name = "id_user", insertable = false, updatable = false)

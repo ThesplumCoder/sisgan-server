@@ -24,16 +24,23 @@ public abstract class User {
     @Column(name = "last_name")
     private String lastName;
 
-
+    @Column(name= "password")
     private String password;
 
     @Column(name= "birth_date")
     private Date birthDate;
-    
+
+    @Column(name= "email")
     private String email;
 
-    
-    
+
+
+
+    @OneToMany(mappedBy = "users")
+    private List<Rol> roles;
+
+
+
 
     public User(String email ,String password) {
         this.email = email;
@@ -93,10 +100,6 @@ public abstract class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
-    @OneToMany(mappedBy = "users")
-    private List<Rol> roles;
 
     public String getCardId() {
         return cardId;

@@ -18,8 +18,19 @@ public class Lot {
     @Column(name = "id_cattle")
     private String cattlesId;
 
+    @Column(name = "name")
+    private String name;
+
     @OneToMany(mappedBy = "lots")
     private List<Cattle> cattles;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getLotsId() {
         return lotsId;
@@ -37,13 +48,7 @@ public class Lot {
         this.cattlesId = cattlesId;
     }
 
-    private String name;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 }

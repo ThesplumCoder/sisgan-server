@@ -8,6 +8,7 @@ import org.springframework.http.InvalidMediaTypeException;
 
 import java.util.List;
 
+
 @Entity
 public class Driver extends User {
 

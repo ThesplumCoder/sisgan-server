@@ -2,14 +2,22 @@ package com.uis.sisgan.persistence.entity;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.util.List;
 
+/*
+        Se  llego a la conclusion que se necesita el Entity
+        ya que para hacer consultas desde el repositorio se necesita si o si.
+ */
+
+@Entity
 public class Farmer extends User {
 
 
+    @Column(name = "mark")
     private String mark;
 
     @Column(name="id_cattle")
@@ -23,6 +31,10 @@ public class Farmer extends User {
 
     public Farmer(String email, String password) {
         super(email, password);
+    }
+
+    public Farmer() {
+
     }
 
     public String getMark() {
