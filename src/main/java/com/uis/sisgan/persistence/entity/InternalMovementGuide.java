@@ -43,7 +43,7 @@ public class InternalMovementGuide {
 
     @ManyToOne
     @JoinColumn(name ="id_driving_license",insertable = false,updatable = false )
-    private Driver drivers;
+    private Transporter drivers;
 
 
     public Integer getInternalMovementGuideId() {

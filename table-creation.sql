@@ -18,29 +18,29 @@ PRIMARY KEY(id)
 CREATE TABLE ROLES (
 id INTEGER,
 id_user INTEGER,
-rol VARCHAR(10),
+rol_name VARCHAR(10),
 PRIMARY KEY(id),
 FOREIGN KEY(id_user) REFERENCES USERS(id)
 );
 
 CREATE TABLE CATTLES (
 id INTEGER,
-id_user INTEGER,
+id_lot INTEGER,
 birth_date DATE,
 weigth INTEGER,
 heigth INTEGER,
 sex VARCHAR(1),
 breed VARCHAR(15),
 PRIMARY KEY(id),
-FOREIGN KEY(id_user) REFERENCES USERS(id)
+FOREIGN KEY(id_lot) REFERENCES LOTS(id)
 );
 
 CREATE TABLE LOTS (
 id INTEGER,
-id_cattle INTEGER,
-name VARCHAR(80) NOT NULL,
+id_user INTEGER,
+lot_name VARCHAR(80) NOT NULL UNIQUE,
 PRIMARY KEY(id),
-FOREIGN KEY(id_cattle) REFERENCES CATTLES(id)
+FOREIGN KEY(id_user) REFERENCES USERS(id)
 );
 
 CREATE TABLE INTERNAL_MOVEMENT_GUIDES (
@@ -50,11 +50,11 @@ vehicle_plate VARCHAR(10),
 origin VARCHAR(100),
 destination VARCHAR(100),
 signature_petitioner VARCHAR(100),
-id_transporter INTEGER,
+id_user_transporter INTEGER,
 application_date DATE,
 mobilization_date DATE,
 signature_ica_official VARCHAR(100),
 PRIMARY KEY(id),
 FOREIGN KEY(id_lot) REFERENCES LOTS(id),
-FOREIGN KEY(id_transporter) REFERENCES USERS(id)
+FOREIGN KEY(id_user_transporter) REFERENCES USERS(id)
 );
