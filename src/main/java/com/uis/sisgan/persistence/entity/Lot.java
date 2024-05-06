@@ -1,54 +1,166 @@
 package com.uis.sisgan.persistence.entity;
 
-
-import jakarta.persistence.*;
-
+import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name="lots")
-public class Lot {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+/**
+ * Un lote es una agrupación de ganado, que pertenece a cierto propietario.
+ *
+ * @author Anderson Acuña (GitHub: ThesplumCoder).
+ */
+@Entity
+@Table(name = "LOTS")
+public class Lot {
 
     @Id
     @GeneratedValue
-    @Column(name="id_lots")
-    private String lotsId;
+    @Column(name = "id")
+    private Integer id;
 
-    @Column(name = "id_cattle")
-    private String cattlesId;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private Propietary propietary;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "lot_name", length = 80, nullable = true, unique = true)
+    private String lotName;
 
-    @OneToMany(mappedBy = "lots")
+    @Column(name = "creation_date", nullable = false)
+    private LocalDate creationDate;
+
+    @Column(name = "last_modification")
+    private LocalDate lastModification;
+
+    @OneToMany(mappedBy = "lot")
     private List<Cattle> cattles;
 
-    public String getName() {
-        return name;
+    /**
+     * Retorna el identificador del lote.
+     *
+     * @return Número que identifica el lote.
+     */
+    public Integer getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    /**
+     * Retorna el propietario del lote.
+     *
+     * @return Instancia de {@link Propietary} que tiene los datos del
+     *         propietario.
+     */
+    public Propietary getPropietary() {
+        return propietary;
     }
 
-    public String getLotsId() {
-        return lotsId;
+    /**
+     * Retorna el nombre del lote.
+     *
+     * @return Texto con el nombre del lote.
+     */
+    public String getLotName() {
+        return lotName;
     }
 
-    public void setLotsId(String lotsId) {
-        this.lotsId = lotsId;
+    /**
+     * Retorna la fecha de creación del lote.
+     *
+     * @return Fecha de creación del lote.
+     */
+    public LocalDate getCreationDate() {
+        return creationDate;
     }
 
-    public String getCattlesId() {
-        return cattlesId;
+    /**
+     * Retorna la fecha de última modificación del lote.
+     *
+     * @return Fecha de última modificación.
+     */
+    public LocalDate getLastModification() {
+        return lastModification;
     }
 
-    public void setCattlesId(String cattlesId) {
-        this.cattlesId = cattlesId;
+    /**
+     * Retorna todo el ganado que está en el lote.
+     *
+     * @return Una lista con todo el ganado del lote.
+     */
+    public List<Cattle> getCattles() {
+        return cattles;
     }
 
+    /**
+     * Cambia el identificador del lote. Si se pasa un nulo no lo asigna.
+     *
+     * @param id Identificador numérico del lote.
+     */
+    public void setId(Integer id) {
+        if (id != null) {
+            this.id = id;
+        }
+    }
 
+    /**
+     * Cambia el propietario de lote, si se pasa nulo no lo asigna.
+     *
+     * @param propietary Objeto de con los datos del nuevo propietario.
+     */
+    public void setPropietary(Propietary propietary) {
+        if (propietary != null) {
+            this.propietary = propietary;
+        }
+    }
 
+    /**
+     * Cambia el nombre del lote. Si se pasa un nulo como nombre entonces el
+     * campo quedará vacío.
+     *
+     * @param lotName Nombre del lote.
+     */
+    public void setLotName(String lotName) {
+        this.lotName = lotName;
+    }
 
+    /**
+     * Cambia la fecha de creación del lote. Si se pasa nulo no lo asigna.
+     *
+     * @param creationDate Fecha de creación de lote.
+     */
+    public void setCreationDate(LocalDate creationDate) {
+        if (creationDate != null) {
+            this.creationDate = creationDate;
+        }
+    }
+
+    /**
+     * Cambia la fecha de última modificación del lote. Si se pasa nulo no lo
+     * asigna.
+     *
+     * @param lastModification Fecha de última modificación.
+     */
+    public void setLastModification(LocalDate lastModification) {
+        if (lastModification != null) {
+            this.lastModification = lastModification;
+        }
+    }
+
+    /**
+     * Cambia la lista que contiene todo el ganado que está relacionado con el
+     * lote.
+     *
+     * @param cattles Lista con el ganado que pertenece al lote.
+     */
+    public void setCattles(List<Cattle> cattles) {
+        if (cattles != null) {
+            this.cattles = cattles;
+        }
+    }
 }

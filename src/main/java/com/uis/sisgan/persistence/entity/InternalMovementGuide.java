@@ -1,7 +1,14 @@
 package com.uis.sisgan.persistence.entity;
 
-import jakarta.persistence.*;
 
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 @Entity
@@ -12,7 +19,6 @@ public class InternalMovementGuide {
     @GeneratedValue
     @Column(name = "id_internal_movement")
     private Integer internalMovementGuideId;
-
 
     @Column(name="id_lot")
     private Integer lotsId;
