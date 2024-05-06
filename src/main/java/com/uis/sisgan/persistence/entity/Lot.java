@@ -30,6 +30,10 @@ public class Lot {
     @JoinColumn(name = "id_user")
     private Propietary propietary;
 
+    @ManyToOne
+    @JoinColumn(name = "id_internal_movement_guide")
+    private InternalMovementGuide internalMovementGuide;
+
     @Column(name = "lot_name", length = 80, nullable = true, unique = true)
     private String lotName;
 
@@ -59,6 +63,17 @@ public class Lot {
      */
     public Propietary getPropietary() {
         return propietary;
+    }
+
+    /**
+     * Retorna la guía de movimiento interna en la que está el lote. Si ninguna
+     * guía se refiere al lote entonces devolverá nulo.
+     *
+     * @return Instancia de {@link InternalMovementGuide} en la que está adjunto
+     *         el lote.
+     */
+    public InternalMovementGuide getInternalMovementGuide() {
+        return internalMovementGuide;
     }
 
     /**
@@ -117,6 +132,17 @@ public class Lot {
         if (propietary != null) {
             this.propietary = propietary;
         }
+    }
+
+    /**
+     * Cambia la guía de movimiento interno en la que aparece el lote. Si se
+     * pasa nulo el lote se desvinculará de la guía.
+     *
+     * @param internalMovementGuide Guía de movimiento interno a la que se
+     *                              anexará el lote.
+     */
+    public void setInternalMovementGuide(InternalMovementGuide internalMovementGuide) {
+        this.internalMovementGuide = internalMovementGuide;
     }
 
     /**
