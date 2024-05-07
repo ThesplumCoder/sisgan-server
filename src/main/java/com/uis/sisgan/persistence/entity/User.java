@@ -1,80 +1,89 @@
 package com.uis.sisgan.persistence.entity;
 
-import jakarta.persistence.*;
-
-import java.util.Date;
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import org.hibernate.annotations.DiscriminatorFormula;
 
 @Entity
-@Table(name="users")
+@Table(name = "USERS")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorFormula("CASE "
+        + "WHEN id_card_ica IS NOT NULL THEN 'IcaOfficial' "
+        + "WHEN id_card_ica IS NULL AND id_driving_license IS NOT NULL THEN 'Transporter' "
+        + "ELSE 'Propietary' END")
 public abstract class User {
 
-
-    @GeneratedValue
     @Id
-    @Column(name = "id_user")
-    private String userId;
+    private Integer id;
 
-    @Column(name="id_card")
-    private String cardId;
+    @Column(name = "id_card", length = 20)
+    private String idCard;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", length = 100)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", length = 100)
     private String lastName;
 
-    @Column(name= "password")
+    @Column(name = "password", length = 200)
     private String password;
 
-    @Column(name= "birth_date")
-    private Date birthDate;
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 
-    @Column(name= "email")
+    @Column(name = "email", length = 100)
     private String email;
 
-
-
-
-    @OneToMany(mappedBy = "users")
-    private List<Rol> roles;
-
-
-
-
-    public User(String email ,String password) {
-        this.email = email;
-        this.password = password;
-
+    public Integer getId() {
+        return id;
     }
 
-    public User() {
-
+    /**
+     * Cambia el identificador del usuario
+     *
+     * @param id Número que identifique el usuario.
+     */
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-
-    public String getUserId() {
-        return userId;
+    /**
+     * Retorna el identificador del usuario.
+     *
+     * @return Identificador del usuario.
+     */
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    /**
+     * Cambia el identificador de la tarjeta de identificación.
+     *
+     * @param idCard Identificador de la tarjeta de identificación.
+     */
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String first_name) {
-        this.firstName = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String last_name) {
-        this.lastName = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -85,12 +94,12 @@ public abstract class User {
         this.password = password;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birth_date) {
-        this.birthDate = birth_date;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {
@@ -99,12 +108,5 @@ public abstract class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCardId() {
-        return cardId;
-    }
-    public void setCardId(String id_card) {
-        this.cardId = id_card;
     }
 }

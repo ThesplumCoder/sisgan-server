@@ -1,65 +1,69 @@
 package com.uis.sisgan.persistence.entity;
 
-import jakarta.persistence.*;
 
-import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "internal_movement_guides")
+@Table(name = "INTERNAL_MOVEMENT_GUIDES")
 public class InternalMovementGuide {
 
     @Id
     @GeneratedValue
-    @Column(name = "id_internal_movement")
-    private Integer internalMovementGuideId;
+    @Column(name = "id")
+    private Integer id;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_user_transporter")
+    private Transporter transporter;
 
-
-    @Column(name="id_lot")
-    private Integer lotsId;
-
-    @Column(name="vehicle_plate")
+    @Column(name ="vehicle_plate", length = 10)
     private String vehiclePlate;
 
-    @Column(name = "origin")
+    @Column(name = "origin", length = 100)
     private String origin;
 
-    @Column(name= "destination")
+    @Column(name = "destination", length = 100)
     private String destination;
 
-    @Column(name="signature_petitioner")
+    @Column(name = "signature_petitioner", length = 100)
     private String signaturePetitioner;
 
-    @Column(name = "id_driving_license")
-    private Integer drivingLicenseId;
-
     @Column(name = "application_date")
-    private Date applicationDate;
+    private LocalDate applicationDate;
 
-    @Column(name="movement_date")
-    private Date movementDate;
+    @Column(name = "movement_date")
+    private LocalDate movementDate;
 
-    @Column(name="signature_ica_official")
+    @Column(name = "signature_ica_official", length = 100)
     private String signatureIcaOfficial;
 
-    @ManyToOne
-    @JoinColumn(name ="id_driving_license",insertable = false,updatable = false )
-    private Driver drivers;
+    @OneToMany(mappedBy = "internalMovementGuide")
+    private List<Lot> lots;
 
-
-    public Integer getInternalMovementGuideId() {
-        return internalMovementGuideId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setInternalMovementGuideId(Integer internalMovementGuideId) {
-        this.internalMovementGuideId = internalMovementGuideId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getLotsId() {
-        return lotsId;
+    public Transporter getTransporter() {
+        return transporter;
     }
 
-    public void setLotsId(Integer lotsId) {
-        this.lotsId = lotsId;
+    public void setTransporter(Transporter transporter) {
+        this.transporter = transporter;
     }
 
     public String getVehiclePlate() {
@@ -94,27 +98,19 @@ public class InternalMovementGuide {
         this.signaturePetitioner = signaturePetitioner;
     }
 
-    public Integer getDrivingLicenseId() {
-        return drivingLicenseId;
-    }
-
-    public void setDrivingLicenseId(Integer drivingLicenseId) {
-        this.drivingLicenseId = drivingLicenseId;
-    }
-
-    public Date getApplicationDate() {
+    public LocalDate getApplicationDate() {
         return applicationDate;
     }
 
-    public void setApplicationDate(Date applicationDate) {
+    public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }
 
-    public Date getMovementDate() {
+    public LocalDate getMovementDate() {
         return movementDate;
     }
 
-    public void setMovementDate(Date movementDate) {
+    public void setMovementDate(LocalDate movementDate) {
         this.movementDate = movementDate;
     }
 
@@ -125,4 +121,14 @@ public class InternalMovementGuide {
     public void setSignatureIcaOfficial(String signatureIcaOfficial) {
         this.signatureIcaOfficial = signatureIcaOfficial;
     }
+
+    public List<Lot> getLots() {
+        return lots;
+    }
+
+    public void setLots(List<Lot> lots) {
+        this.lots = lots;
+    }
+    
+    
 }
