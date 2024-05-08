@@ -1,6 +1,8 @@
 package com.uis.sisgan.persistence.crud;
 
-import com.uis.sisgan.persistence.entity.Farmer;
+
+import com.uis.sisgan.persistence.entity.Propietary;
+
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.Optional;
     ejemplo en la Interface Cattles.
 
  */
-public interface FarmerCrudRepository extends CrudRepository<Farmer, Integer> {
+
+public interface FarmerCrudRepository extends CrudRepository<Propietary, Integer> {
+
 
 }
