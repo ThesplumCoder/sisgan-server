@@ -19,6 +19,8 @@ public class Propietary extends User {
     @OneToMany(mappedBy = "propietary")
     private List<Lot> lots;
 
+
+
     /**
      * Retorna la ruta hacia la imágen que representa la marca.
      *
