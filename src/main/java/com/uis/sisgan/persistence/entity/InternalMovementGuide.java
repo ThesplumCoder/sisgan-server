@@ -1,7 +1,5 @@
 package com.uis.sisgan.persistence.entity;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +19,7 @@ public class InternalMovementGuide {
     @GeneratedValue
     @Column(name = "id")
     private Integer id;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_user_transporter")
     private Transporter transporter;
@@ -129,6 +127,6 @@ public class InternalMovementGuide {
     public void setLots(List<Lot> lots) {
         this.lots = lots;
     }
-    
-    
+
+
 }
