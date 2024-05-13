@@ -1,39 +1,34 @@
-package com.uis.sisgan.persistence;
+package com.uis.sisgan.persistence.service;
 
 import com.uis.sisgan.persistence.crud.LotCrudRepository;
 import com.uis.sisgan.persistence.entity.Lot;
-import com.uis.sisgan.persistence.service.LotService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-// This class represents a repository for Lot entities.
-@Repository
-public class LotRepository {
+@Service
+public class LotService {
 
-    @Autowired
-    private LotService lotService;
+    private LotCrudRepository lotCrudRepository;
 
     // Retrieve all lots from the repository.
     public List<Lot> getAll(){
-        return lotService.getAll();
+        return (List<Lot>) lotCrudRepository.findAll();
     }
 
     // Retrieve a specific lot by its ID from the repository.
     public Optional<Lot> getLot(int lotId){
-        return lotService.getLot(lotId);
+        return lotCrudRepository.findById(lotId);
     }
 
     // Save a lot to the repository.
     public Lot save(Lot lot){
-        return lotService.save(lot);
+        return lotCrudRepository.save(lot);
     }
 
     // Delete a lot from the repository by its ID.
     public void delete(int lotId){
-        lotService.delete(lotId);
+        lotCrudRepository.deleteById(lotId);
     }
-
 }

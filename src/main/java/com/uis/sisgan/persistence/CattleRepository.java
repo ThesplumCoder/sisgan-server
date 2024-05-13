@@ -2,13 +2,16 @@ package com.uis.sisgan.persistence;
 
 import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
+import com.uis.sisgan.persistence.service.CattleService;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class CattleRepository {
 
-    private CattleCrudRepository cattleCrudRepository;
+    private CattleService cattleService;
 
     /*
         This method calls the corresponding method in the underlying repository interface
@@ -16,23 +19,23 @@ public class CattleRepository {
         This approach saves many lines of code and is efficient.
      */
     public List<Cattle> getAll() {
-        return (List<Cattle>) cattleCrudRepository.findAll();
+        return cattleService.getAll();
     }
 
     public Optional<Cattle> getCattle(int cattleId) {
-        return cattleCrudRepository.findById(cattleId);
+        return cattleService.getCattle(cattleId);
     }
 
     public Cattle save(Cattle cattle) {
-        return cattleCrudRepository.save(cattle);
+        return cattleService.save(cattle);
     }
 
     public void delete(int cattleId) {
-        cattleCrudRepository.deleteById(cattleId);
+        cattleService.delete(cattleId);
     }
 
     // Retrieve cattle by weight and breed from the repository.
     public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed) {
-        return cattleCrudRepository.findByWeightLessThanAndBreed(weight, breed);
+        return cattleService.getCattleByWeightAndBreed(weight, breed);
     }
 }
