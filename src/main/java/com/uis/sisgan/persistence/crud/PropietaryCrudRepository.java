@@ -30,7 +30,8 @@ import java.util.Optional;
 
  */
 
-public interface FarmerCrudRepository extends CrudRepository<Propietary, Integer> {
+public interface PropietaryCrudRepository extends CrudRepository<Propietary, Integer> {
+
 
 
 }

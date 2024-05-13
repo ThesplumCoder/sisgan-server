@@ -6,18 +6,33 @@ import com.uis.sisgan.persistence.entity.Cattle;
 import java.util.List;
 import java.util.Optional;
 
-public class CattleRepository{
+public class CattleRepository {
 
     private CattleCrudRepository cattleCrudRepository;
 
-
     /*
-        Se llama el Metodo y se configura que es lo que debe hacer
-        Asi nos ahorramos muchas lineas de codigo y es eficiente
-
+        This method calls the corresponding method in the underlying repository interface
+        and configures what action to perform.
+        This approach saves many lines of code and is efficient.
      */
+    public List<Cattle> getAll() {
+        return (List<Cattle>) cattleCrudRepository.findAll();
+    }
 
-    public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed){
-      return cattleCrudRepository.findByWeightLessThanAndBreed(weight,breed);
+    public Optional<Cattle> getCattle(int cattleId) {
+        return cattleCrudRepository.findById(cattleId);
+    }
+
+    public Cattle save(Cattle cattle) {
+        return cattleCrudRepository.save(cattle);
+    }
+
+    public void delete(int cattleId) {
+        cattleCrudRepository.deleteById(cattleId);
+    }
+
+    // Retrieve cattle by weight and breed from the repository.
+    public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed) {
+        return cattleCrudRepository.findByWeightLessThanAndBreed(weight, breed);
     }
 }

@@ -1,6 +1,6 @@
 package com.uis.sisgan.persistence;
 
-import com.uis.sisgan.persistence.crud.FarmerCrudRepository;
+import com.uis.sisgan.persistence.crud.PropietaryCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
 
 import com.uis.sisgan.persistence.entity.Propietary;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class FarmerRepository  {
+public class PropietaryRepository  {
 
-    private FarmerCrudRepository farmerCrudRepository;
+    private PropietaryCrudRepository propietaryCrudRepository;
 
 
     /*
@@ -23,7 +23,7 @@ public class FarmerRepository  {
      */
 
     public List<Propietary> getAll(){
-        return (List<Propietary>) farmerCrudRepository.findAll();
+        return (List<Propietary>) propietaryCrudRepository.findAll();
     }
 
 
