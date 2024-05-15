@@ -1,8 +1,7 @@
 package com.uis.sisgan.persistence;
 
-import com.uis.sisgan.persistence.crud.LotCrudRepository;
 import com.uis.sisgan.persistence.entity.Lot;
-import com.uis.sisgan.persistence.service.LotService;
+import com.uis.sisgan.service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

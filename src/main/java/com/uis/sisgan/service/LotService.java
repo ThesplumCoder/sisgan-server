@@ -1,4 +1,4 @@
-package com.uis.sisgan.persistence.service;
+package com.uis.sisgan.service;
 
 import com.uis.sisgan.persistence.crud.LotCrudRepository;
 import com.uis.sisgan.persistence.entity.Lot;

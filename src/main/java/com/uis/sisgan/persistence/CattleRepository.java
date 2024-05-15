@@ -1,8 +1,7 @@
 package com.uis.sisgan.persistence;
 
-import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
-import com.uis.sisgan.persistence.service.CattleService;
+import com.uis.sisgan.service.CattleService;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
