@@ -1,5 +1,6 @@
 package com.uis.sisgan.service;
 
+import com.uis.sisgan.persistence.CattleRepository;
 import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,26 +13,26 @@ import java.util.Optional;
 public class CattleService {
 
     @Autowired
-    private CattleCrudRepository cattleCrudRepository;
+    private CattleRepository cattleRepository;
 
     public List<Cattle> getAll() {
-        return (List<Cattle>) cattleCrudRepository.findAll();
+        return (List<Cattle>) cattleRepository.getAll();
     }
 
     public Optional<Cattle> getCattle(int cattleId) {
-        return cattleCrudRepository.findById(cattleId);
+        return cattleRepository.getCattle(cattleId);
     }
 
     public Cattle save(Cattle cattle) {
-        return cattleCrudRepository.save(cattle);
+        return cattleRepository.save(cattle);
     }
 
     public void delete(int cattleId) {
-        cattleCrudRepository.deleteById(cattleId);
+        cattleRepository.delete(cattleId);
     }
 
     // Retrieve cattle by weight and breed from the repository.
     public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed) {
-        return cattleCrudRepository.findByWeightLessThanAndBreed(weight, breed);
+        return cattleRepository.getCattleByWeightAndBreed(weight, breed);
     }
 }

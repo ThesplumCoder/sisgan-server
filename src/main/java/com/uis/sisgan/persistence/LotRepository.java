@@ -1,5 +1,6 @@
 package com.uis.sisgan.persistence;
 
+import com.uis.sisgan.persistence.crud.LotCrudRepository;
 import com.uis.sisgan.persistence.entity.Lot;
 import com.uis.sisgan.service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +14,26 @@ import java.util.Optional;
 public class LotRepository {
 
     @Autowired
-    private LotService lotService;
+    private LotCrudRepository lotCrudRepository;
 
     // Retrieve all lots from the repository.
     public List<Lot> getAll(){
-        return lotService.getAll();
+        return (List<Lot>) lotCrudRepository.findAll();
     }
 
     // Retrieve a specific lot by its ID from the repository.
     public Optional<Lot> getLot(int lotId){
-        return lotService.getLot(lotId);
+        return lotCrudRepository.findById(lotId);
     }
 
     // Save a lot to the repository.
     public Lot save(Lot lot){
-        return lotService.save(lot);
+        return lotCrudRepository.save(lot);
     }
 
     // Delete a lot from the repository by its ID.
     public void delete(int lotId){
-        lotService.delete(lotId);
+        lotCrudRepository.deleteById(lotId);
     }
 
 }
