@@ -27,8 +27,11 @@ public class CattleService {
         return cattleRepository.save(cattle);
     }
 
-    public void delete(int cattleId) {
-        cattleRepository.delete(cattleId);
+    public boolean delete(int cattleId) {
+        return getCattle(cattleId).map(cattle -> {
+            cattleRepository.delete(cattleId);
+            return true;
+        }).orElse(false);
     }
 
     // Retrieve cattle by weight and breed from the repository.

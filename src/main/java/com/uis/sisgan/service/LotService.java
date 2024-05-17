@@ -27,7 +27,11 @@ public class LotService {
     }
 
     // Delete a lot from the repository by its ID.
-    public void delete(int lotId){
-        lotRepository.delete(lotId);
+    public boolean delete(int lotId){
+
+        return getLot(lotId).map(lot -> {
+            lotRepository.delete(lotId);
+            return true;
+        }).orElse(false);
     }
 }
