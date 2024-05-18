@@ -29,9 +29,6 @@ import java.util.Optional;
     ejemplo en la Interface Cattles.
 
  */
-
 public interface PropietaryCrudRepository extends CrudRepository<Propietary, Integer> {
-
-
 
 }
