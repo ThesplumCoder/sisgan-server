@@ -13,26 +13,45 @@ import java.util.Optional;
 @Repository
 public class LotRepository {
 
+    // Repositorio CRUD utilizado para acceder y gestionar entidades de Lot
     @Autowired
     private LotCrudRepository lotCrudRepository;
 
-    // Retrieve all lots from the repository.
-    public List<Lot> getAll(){
+    /**
+     * Recupera todas las entidades de Lot.
+     *
+     * @return List<Lot> Una lista de todas las entidades de Lot.
+     */
+    public List<Lot> getAll() {
         return (List<Lot>) lotCrudRepository.findAll();
     }
 
-    // Retrieve a specific lot by its ID from the repository.
-    public Optional<Lot> getLot(int lotId){
+    /**
+     * Recupera una entidad de Lot por su ID.
+     *
+     * @param lotId El ID de la entidad de Lot a recuperar.
+     * @return Optional<Lot> Un Optional que contiene la entidad de Lot si se encuentra, o vacío si no se encuentra.
+     */
+    public Optional<Lot> getLot(int lotId) {
         return lotCrudRepository.findById(lotId);
     }
 
-    // Save a lot to the repository.
-    public Lot save(Lot lot){
+    /**
+     * Guarda una entidad de Lot en el repositorio.
+     *
+     * @param lot La entidad de Lot a guardar.
+     * @return Lot La entidad de Lot guardada.
+     */
+    public Lot save(Lot lot) {
         return lotCrudRepository.save(lot);
     }
 
-    // Delete a lot from the repository by its ID.
-    public void delete(int lotId){
+    /**
+     * Elimina una entidad de Lot por su ID.
+     *
+     * @param lotId El ID de la entidad de Lot a eliminar.
+     */
+    public void delete(int lotId) {
         lotCrudRepository.deleteById(lotId);
     }
 
