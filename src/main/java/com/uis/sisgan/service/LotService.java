@@ -1,21 +1,18 @@
-package com.uis.sisgan.persistence;
-
-import com.uis.sisgan.persistence.crud.LotCrudRepository;
+package com.uis.sisgan.service;
+import com.uis.sisgan.persistence.LotRepository;
 import com.uis.sisgan.persistence.entity.Lot;
-import com.uis.sisgan.service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-// This class represents a repository for Lot entities.
-@Repository
-public class LotRepository {
+@Service
+public class LotService {
+    // Repositorio utilizado para acceder y gestionar entidades de Lot
 
-    // Repositorio CRUD utilizado para acceder y gestionar entidades de Lot
     @Autowired
-    private LotCrudRepository lotCrudRepository;
+    private LotRepository lotRepository;
 
     /**
      * Recupera todas las entidades de Lot.
@@ -23,7 +20,7 @@ public class LotRepository {
      * @return List<Lot> Una lista de todas las entidades de Lot.
      */
     public List<Lot> getAll() {
-        return (List<Lot>) lotCrudRepository.findAll();
+        return (List<Lot>) lotRepository.getAll();
     }
 
     /**
@@ -33,7 +30,7 @@ public class LotRepository {
      * @return Optional<Lot> Un Optional que contiene la entidad de Lot si se encuentra, o vacío si no se encuentra.
      */
     public Optional<Lot> getLot(int lotId) {
-        return lotCrudRepository.findById(lotId);
+        return lotRepository.getLot(lotId);
     }
 
     /**
@@ -43,16 +40,19 @@ public class LotRepository {
      * @return Lot La entidad de Lot guardada.
      */
     public Lot save(Lot lot) {
-        return lotCrudRepository.save(lot);
+        return lotRepository.save(lot);
     }
 
     /**
-     * Elimina una entidad de Lot por su ID.
+     * Elimina una entidad de Lot por su ID si existe.
      *
      * @param lotId El ID de la entidad de Lot a eliminar.
+     * @return boolean true si la entidad de Lot fue encontrada y eliminada, false en caso contrario.
      */
-    public void delete(int lotId) {
-        lotCrudRepository.deleteById(lotId);
+    public boolean delete(int lotId) {
+        return getLot(lotId).map(lot -> {
+            lotRepository.delete(lotId);
+            return true;
+        }).orElse(false);
     }
-
 }

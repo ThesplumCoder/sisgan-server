@@ -1,19 +1,20 @@
-package com.uis.sisgan.persistence;
+package com.uis.sisgan.service;
 
+import com.uis.sisgan.persistence.CattleRepository;
 import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
-import com.uis.sisgan.service.CattleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class CattleRepository {
+@Service
+public class CattleService {
 
+    // Repositorio utilizado para acceder y gestionar entidades de Cattle
     @Autowired
-    private CattleCrudRepository cattleCrudRepository;
+    private CattleRepository cattleRepository;
 
     /**
      * Recupera todas las entidades de Cattle.
@@ -21,7 +22,7 @@ public class CattleRepository {
      * @return List<Cattle> Una lista de todas las entidades de Cattle.
      */
     public List<Cattle> getAll() {
-        return (List<Cattle>) cattleCrudRepository.findAll();
+        return (List<Cattle>) cattleRepository.getAll();
     }
 
     /**
@@ -31,7 +32,7 @@ public class CattleRepository {
      * @return Optional<Cattle> Un Optional que contiene la entidad de Cattle si se encuentra, o vacío si no se encuentra.
      */
     public Optional<Cattle> getCattle(int cattleId) {
-        return cattleCrudRepository.findById(cattleId);
+        return cattleRepository.getCattle(cattleId);
     }
 
     /**
@@ -41,16 +42,20 @@ public class CattleRepository {
      * @return Cattle La entidad de Cattle guardada.
      */
     public Cattle save(Cattle cattle) {
-        return cattleCrudRepository.save(cattle);
+        return cattleRepository.save(cattle);
     }
 
     /**
-     * Elimina una entidad de Cattle por su ID.
+     * Elimina una entidad de Cattle por su ID si existe.
      *
      * @param cattleId El ID de la entidad de Cattle a eliminar.
+     * @return boolean true si la entidad de Cattle fue encontrada y eliminada, false en caso contrario.
      */
-    public void delete(int cattleId) {
-        cattleCrudRepository.deleteById(cattleId);
+    public boolean delete(int cattleId) {
+        return getCattle(cattleId).map(cattle -> {
+            cattleRepository.delete(cattleId);
+            return true;
+        }).orElse(false);
     }
 
     /**
@@ -61,6 +66,6 @@ public class CattleRepository {
      * @return Optional<List<Cattle>> Un Optional que contiene una lista de entidades de Cattle que coinciden con el peso y la raza, o vacío si no se encuentra ninguna.
      */
     public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed) {
-        return cattleCrudRepository.findByWeightLessThanAndBreed(weight, breed);
+        return cattleRepository.getCattleByWeightAndBreed(weight, breed);
     }
 }

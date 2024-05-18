@@ -1,19 +1,21 @@
 package com.uis.sisgan.persistence;
 
-import com.uis.sisgan.persistence.crud.FarmerCrudRepository;
+import com.uis.sisgan.persistence.crud.PropietaryCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
 
 import com.uis.sisgan.persistence.entity.Propietary;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 
-public class FarmerRepository  {
+@Repository
+public class PropietaryRepository  {
 
-    private FarmerCrudRepository farmerCrudRepository;
+    @Autowired
+    private PropietaryCrudRepository propietaryCrudRepository;
 
 
     /*
@@ -23,7 +25,7 @@ public class FarmerRepository  {
      */
 
     public List<Propietary> getAll(){
-        return (List<Propietary>) farmerCrudRepository.findAll();
+        return (List<Propietary>) propietaryCrudRepository.findAll();
     }
 
 
