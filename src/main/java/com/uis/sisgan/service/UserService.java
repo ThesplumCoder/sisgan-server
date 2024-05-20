@@ -1,19 +1,15 @@
 package com.uis.sisgan.service;
 
+import java.util.Optional;
+
 import com.uis.sisgan.persistence.UserRepository;
 import com.uis.sisgan.persistence.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-
-
 
 @Service
 public class UserService {
-
-    // Repositorio utilizado para acceder y gestionar entidades de User
+    
     @Autowired
     private UserRepository userRepository;
 
@@ -26,5 +22,15 @@ public class UserService {
      */
     public Optional<User> loadUserByUserName(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
+    }
+    
+    /**
+     * Gestiona el registro de nuevos usuarios.
+     * 
+     * @param user Usuario nuevo a guardar.
+     * @return El usuario que se guardó.
+     */
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }

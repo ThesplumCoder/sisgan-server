@@ -1,10 +1,10 @@
 USE sisgan_server;
 
 CREATE TABLE USERS (
-id INTEGER,
+id INTEGER AUTO_INCREMENT,
 id_card VARCHAR(20),
 id_card_ica INTEGER,
-id_driving_livense INTEGER,
+id_driving_license INTEGER,
 first_name VARCHAR(100),
 last_name VARCHAR(100),
 password VARCHAR(200),

@@ -1,32 +1,29 @@
 package com.uis.sisgan.persistence;
 
-import com.uis.sisgan.persistence.crud.PropietaryCrudRepository;
-import com.uis.sisgan.persistence.entity.Cattle;
-
+import java.util.List;
 import com.uis.sisgan.persistence.entity.Propietary;
+import com.uis.sisgan.persistence.crud.PropietaryCrudRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
-
 @Repository
-public class PropietaryRepository  {
+public class PropietaryRepository {
 
     @Autowired
     private PropietaryCrudRepository propietaryCrudRepository;
+    
+    public Optional<Propietary> getById(Integer id) {
+        return propietaryCrudRepository.findById(id);
+    }
 
-
-    /*
-        Aqui se Escriben lo que van a hacer los metodos, como findAll()
-        y que retornan. este es el verdadero Repository
-
-     */
-
-    public List<Propietary> getAll(){
+    public List<Propietary> getAll() {
         return (List<Propietary>) propietaryCrudRepository.findAll();
     }
 
+    public Propietary save(Propietary propietary) {
+        return propietaryCrudRepository.save(propietary);
+    }
 
 }
