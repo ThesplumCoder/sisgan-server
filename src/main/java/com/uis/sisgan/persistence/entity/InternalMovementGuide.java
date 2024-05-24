@@ -1,8 +1,10 @@
 package com.uis.sisgan.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,12 +18,13 @@ import java.util.List;
 public class InternalMovementGuide {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_user_transporter")
+    @JsonIgnore
     private Transporter transporter;
 
     @Column(name ="vehicle_plate", length = 10)

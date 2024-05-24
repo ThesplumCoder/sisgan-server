@@ -21,6 +21,10 @@ public class PropietaryRepository {
     public List<Propietary> getAll() {
         return (List<Propietary>) propietaryCrudRepository.findAll();
     }
+    
+    public Optional<Propietary> findByEmail(String email) {
+        return propietaryCrudRepository.findByEmail(email);
+    }
 
     public Propietary save(Propietary propietary) {
         return propietaryCrudRepository.save(propietary);
