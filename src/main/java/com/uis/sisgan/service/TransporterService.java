@@ -1,0 +1,45 @@
+package com.uis.sisgan.service;
+
+import com.uis.sisgan.persistence.entity.Transporter;
+import com.uis.sisgan.persistence.TransporterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ *
+ * @author Anderson Acuña
+ */
+@Service
+public class TransporterService {
+
+    @Autowired
+    private TransporterRepository transporterRepository;
+
+    /**
+     * Devuelve un transportador por el identificador.
+     *
+     * @param id Identificador del transportador objetivo.
+     * @return Si se halla una coincidencia se devuelve un objeto con los datos
+     *         del transportador, sino se retorna nulo.
+     */
+    public Transporter findById(Integer id) {
+        Transporter res;
+
+        res = transporterRepository.findById(id);
+        return res;
+    }
+
+    /**
+     * Devuelve un transportador por el correo electrónico.
+     *
+     * @param email Correo electrónico del transportador objetivo.
+     * @return Si se halla una coincidencia se devuelve un objeto con los datos
+     *         del transportador, sino se retorna nulo.
+     */
+    public Transporter findByEmail(String email) {
+        Transporter res;
+
+        res = transporterRepository.findByEmail(email);
+        return res;
+    }
+}

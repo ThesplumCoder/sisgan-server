@@ -2,6 +2,7 @@ package com.uis.sisgan.service;
 
 import com.uis.sisgan.persistence.PropietaryRepository;
 import com.uis.sisgan.persistence.entity.Propietary;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,23 @@ public class PropietaryService {
 
         if (result.isPresent()) {
             return result.get();
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * Devuelve el propietario que tiene el correo electrónico suministrado.
+     *
+     * @param id Correo electrónico del usuario propietario.
+     * @return Si se encuentra un propietario con ese correo entonces se
+     *         retorna una objeto con sus datos, de lo contrario retorna nulo.
+     */
+    public Propietary findByEmail(String email) {
+        Optional<Propietary> propietary = propietaryRepository.findByEmail(email);
+        
+        if (propietary.isPresent()) {
+            return propietary.get();
         } else {
             return null;
         }
