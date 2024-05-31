@@ -115,11 +115,38 @@ public class InternalMovementGuideController {
     
     @PatchMapping
     public ResponseEntity<InternalMovementGuide> update(@RequestBody InternalMovementGuide internalMovementGuide, Principal principal) {
-        return ResponseEntity.ok().build();
+        int amountFields = internalMovementGuide.getClass().getDeclaredFields().length;
+        InternalMovementGuide original;
+        InternalMovementGuide updated;
+        
+        if (internalMovementGuide.getId() != null) {
+            original = internalMovementGuideService.findById(internalMovementGuide.getId());
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+        // [WIP]
+        updated = internalMovementGuideService.update(internalMovementGuide);
+        if (updated == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(updated);
     }
     
     @DeleteMapping
-    public ResponseEntity<InternalMovementGuide> delete(@RequestBody String ids, Principal principal) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<InternalMovementGuide>> delete(@RequestBody List<InternalMovementGuide> internalMovementGuides, Principal principal) {
+        boolean isDeleted = false;
+        ArrayList<Integer> ids = new ArrayList<>();
+        
+        for (InternalMovementGuide guide : internalMovementGuides) {
+            ids.add(guide.getId());
+        }
+        
+        isDeleted = internalMovementGuideService.deleteAllById(ids);
+        if (isDeleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
