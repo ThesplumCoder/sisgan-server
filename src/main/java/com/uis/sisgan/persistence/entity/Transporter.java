@@ -1,5 +1,6 @@
 package com.uis.sisgan.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -14,6 +15,7 @@ public class Transporter extends User {
     private String idDrivingLicense;
 
     @OneToMany(mappedBy = "transporter")
+    @JsonIgnore
     private List<InternalMovementGuide> internalMovementGuides;
 
     /**

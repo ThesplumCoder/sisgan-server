@@ -24,7 +24,6 @@ public class InternalMovementGuide {
 
     @ManyToOne
     @JoinColumn(name = "id_user_transporter")
-    @JsonIgnore
     private Transporter transporter;
 
     @Column(name ="vehicle_plate", length = 10)
