@@ -13,10 +13,10 @@ import java.util.Optional;
 
 @Service
 public class InternalMovementGuideService {
-    
+
     @Autowired
     private TransporterRepository transporterRepository;
-    
+
     @Autowired
     private InternalMovementGuideRepository internalMovementGuideRepository;
 
@@ -27,25 +27,30 @@ public class InternalMovementGuideService {
      */
     public List<InternalMovementGuide> getAllByTransporter(String email) throws UserPrincipalNotFoundException {
         Transporter transporter = transporterRepository.findByEmail(email);
-        
+
         if (transporter == null) {
             throw new UserPrincipalNotFoundException(email);
         }
-        
+
         List<InternalMovementGuide> guides = transporter.getInternalMovementGuides();
         return guides;
     }
 
     /**
-     * Recupera una guía de movimiento interno por su ID.
+     * Busca una guía de movimiento interno según su identificador.
      *
-     * @param internalMovementId El ID de la guía de movimiento interno a
-     *                           recuperar.
-     * @return {@link Optional} Un Optional que contiene la guía de movimiento
-     *         interno si se encuentra, o vacío si no se encuentra.
+     * @param id Identificador de la guía de movimiento interno.
+     * @return Si se encuentra una guía con ese identificador, se retornarán sus
+     *         datos; de lo contrario, se retornará nulo.
      */
-    public Optional<InternalMovementGuide> getInternalMovementGuideById(Integer internalMovementId) {
-        return internalMovementGuideRepository.getInternalMovementGuideById(internalMovementId);
+    public InternalMovementGuide findById(Integer id) {
+        Optional<InternalMovementGuide> guide;
+
+        guide = internalMovementGuideRepository.getInternalMovementGuideById(id);
+        if (guide.isPresent()) {
+            return guide.get();
+        }
+        return null;
     }
 
     /**
@@ -55,21 +60,37 @@ public class InternalMovementGuideService {
      * @return La guía de movimiento interno guardada.
      */
     public InternalMovementGuide save(InternalMovementGuide internalMovementGuide) {
-        return internalMovementGuideRepository.save(internalMovementGuide);
+        if (internalMovementGuide.getId() == null) {
+            return internalMovementGuideRepository.save(internalMovementGuide);
+        }
+        return null;
     }
 
     /**
-     * Elimina una guía de movimiento interno por su ID si existe.
+     * Actualiza una guía de movimiento interno en el repositorio.
      *
-     * @param internalMovementId El ID de la guía de movimiento interno a
-     *                           eliminar.
-     * @return boolean true si la guía de movimiento interno fue encontrada y
-     *         eliminada, false en caso contrario.
+     * @param internalMovementGuide La guía de movimiento interno a actualizar
+     *                              con los nuevos valores.
+     * @return Si es exitoso, retorna la guía de movimiento interno actualizada;
+     *         por otro lado, si algo falla retorna nulo.
      */
-    public boolean delete(Integer internalMovementId) {
-        return getInternalMovementGuideById(internalMovementId).map(internalMovementGuide -> {
-            internalMovementGuideRepository.delete(internalMovementId);
-            return true;
-        }).orElse(false);
+    public InternalMovementGuide update(InternalMovementGuide internalMovementGuide) {
+        if (internalMovementGuide.getId() != null) {
+            return internalMovementGuideRepository.save(internalMovementGuide);
+        }
+        return null;
+    }
+
+    /**
+     * Elimina todas las guías de movimiento interno que estén en la lista de
+     * identificadores objetivo.
+     *
+     * @param ids Lista de identificadores de las guías de movimiento a
+     *            eliminar.
+     * @return Si la eliminación tuvo éxito, retorna {@code true}; de lo
+     *         contrario, retorna {@code false}.
+     */
+    public boolean deleteAllById(List<Integer> ids) {
+        return internalMovementGuideRepository.deleteAllById(ids);
     }
 }

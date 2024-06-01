@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,5 +111,42 @@ public class InternalMovementGuideController {
 
         res = ResponseEntity.created(location).body(savedIntMovementGuide);
         return res;
+    }
+    
+    @PatchMapping
+    public ResponseEntity<InternalMovementGuide> update(@RequestBody InternalMovementGuide internalMovementGuide, Principal principal) {
+        int amountFields = internalMovementGuide.getClass().getDeclaredFields().length;
+        InternalMovementGuide original;
+        InternalMovementGuide updated;
+        
+        if (internalMovementGuide.getId() != null) {
+            original = internalMovementGuideService.findById(internalMovementGuide.getId());
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+        // [WIP]
+        updated = internalMovementGuideService.update(internalMovementGuide);
+        if (updated == null) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok(updated);
+    }
+    
+    @DeleteMapping
+    public ResponseEntity<List<InternalMovementGuide>> delete(@RequestBody List<InternalMovementGuide> internalMovementGuides, Principal principal) {
+        boolean isDeleted = false;
+        ArrayList<Integer> ids = new ArrayList<>();
+        
+        for (InternalMovementGuide guide : internalMovementGuides) {
+            ids.add(guide.getId());
+        }
+        
+        isDeleted = internalMovementGuideService.deleteAllById(ids);
+        if (isDeleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

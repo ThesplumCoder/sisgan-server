@@ -1,10 +1,9 @@
 package com.uis.sisgan.controller;
 
+import com.uis.sisgan.persistence.entity.Transporter;
+import com.uis.sisgan.service.TransporterService;
 import java.net.URI;
-import com.uis.sisgan.persistence.entity.Propietary;
-import com.uis.sisgan.service.PropietaryService;
 import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,36 +21,36 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(path = "/propietary")
-public class PropietaryController {
+@RequestMapping(path = "/transporter")
+public class TransporterController {
     
     @Autowired
-    private PropietaryService propietaryService;
+    private TransporterService transporterService;
     
     @GetMapping()
-    public ResponseEntity<Propietary> getInfo(Principal principal) {
-        Propietary propietary = propietaryService.findByEmail(principal.getName());
+    public ResponseEntity<Transporter> getInfo(Principal principal) {
+        Transporter transporter = transporterService.findByEmail(principal.getName());
         
-        if (propietary == null) {
+        if (transporter == null) {
             return ResponseEntity.notFound().build();
         } else {
-            return ResponseEntity.ok(propietary);
+            return ResponseEntity.ok(transporter);
         }
     }
     
     @PostMapping()
-    public ResponseEntity<Propietary> register(@RequestBody Propietary propietary, UriComponentsBuilder ucb) {
+    public ResponseEntity<Transporter> register(@RequestBody Transporter transporter, UriComponentsBuilder ucb) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodedPss = encoder.encode(propietary.getPassword());
-        propietary.setPassword(encodedPss);
-        Propietary savedPropietary = propietaryService.save(propietary);
+        String encodedPss = encoder.encode(transporter.getPassword());
+        transporter.setPassword(encodedPss);
+        Transporter savedTransporter = transporterService.save(transporter);
         
         URI location = ucb
-            .path("propietary/" + savedPropietary.getId())
-            .buildAndExpand(savedPropietary.getId())
+            .path("transporter/" + savedTransporter.getId())
+            .buildAndExpand(savedTransporter.getId())
             .toUri();
         
-        ResponseEntity<Propietary> res = ResponseEntity.created(location).body(savedPropietary);
+        ResponseEntity<Transporter> res = ResponseEntity.created(location).body(savedTransporter);
         return res;
     }
 }

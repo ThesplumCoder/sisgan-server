@@ -42,4 +42,17 @@ public class TransporterService {
         res = transporterRepository.findByEmail(email);
         return res;
     }
+
+    /**
+     * Guarda o actualiza los datos sobre un transportador.
+     *
+     * @param transporter Datos del transportador.
+     * @return Si la operación es exitosa se retorna los datos del
+     *         transportador, en caso contrario se retorna nulo.
+     */
+    public Transporter save(Transporter transporter) {
+        Transporter saved = transporterRepository.save(transporter);
+
+        return saved;
+    }
 }
