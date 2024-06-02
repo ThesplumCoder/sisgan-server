@@ -16,5 +16,7 @@ public interface CattleCrudRepository extends CrudRepository<Cattle, Integer> {
 
     Optional<List<Cattle>> findByWeightLessThanAndBreed(float weight, String breed);
 
+    Optional<List<Cattle>> findByLotId(Integer lotId);
+
 
 }

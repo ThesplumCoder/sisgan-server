@@ -1,9 +1,13 @@
 package com.uis.sisgan.service;
 
 import com.uis.sisgan.persistence.PropietaryRepository;
+import com.uis.sisgan.persistence.entity.Cattle;
+import com.uis.sisgan.persistence.entity.Lot;
 import com.uis.sisgan.persistence.entity.Propietary;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +39,7 @@ public class PropietaryService {
             return null;
         }
     }
+
     
     /**
      * Devuelve el propietario que tiene el correo electrónico suministrado.

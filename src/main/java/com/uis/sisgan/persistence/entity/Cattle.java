@@ -1,12 +1,8 @@
 package com.uis.sisgan.persistence.entity;
 import java.time.LocalDate;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 /**
  * Modela los bovinos que tiene un propietario de ganado.
@@ -18,12 +14,14 @@ import jakarta.persistence.Table;
 public class Cattle {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
+    @Column(name = "id_lot")
+    private Integer lotId;
     @ManyToOne
-    @JoinColumn(name = "id_lot")
+    @JoinColumn(name = "id_lot", insertable = false,updatable = false)
+    @JsonIgnore
     private Lot lot;
 
     @Column(name= "birth_date", nullable = false)
@@ -35,7 +33,7 @@ public class Cattle {
     @Column(name = "height", nullable = false)
     private Integer height;
 
-    @Column(name = "sex", nullable = false)
+    @Column(name = "sex", nullable = true)
     private String sex;
 
     @Column(name = "breed", nullable = false)
@@ -154,7 +152,7 @@ public class Cattle {
      * 
      * @param height Altura del bovino.
      */
-    public void setHeigh(Integer height) {
+    public void setHeight(Integer height) {
         if (height != null && height > 0) {
             this.height = height;
         }
@@ -190,5 +188,13 @@ public class Cattle {
                 this.breed = breed;
             }
         }
+    }
+
+    public Integer getLotId() {
+        return lotId;
+    }
+
+    public void setLotId(Integer lotId) {
+        this.lotId = lotId;
     }
 }

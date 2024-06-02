@@ -2,7 +2,9 @@ package com.uis.sisgan.persistence;
 
 import com.uis.sisgan.persistence.crud.LotCrudRepository;
 import com.uis.sisgan.persistence.entity.Lot;
+import com.uis.sisgan.persistence.entity.Propietary;
 import com.uis.sisgan.service.LotService;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +27,8 @@ public class LotRepository {
     public List<Lot> getAll() {
         return (List<Lot>) lotCrudRepository.findAll();
     }
+
+
 
     /**
      * Recupera una entidad de Lot por su ID.
@@ -53,6 +57,14 @@ public class LotRepository {
      */
     public void delete(int lotId) {
         lotCrudRepository.deleteById(lotId);
+    }
+
+    public Optional<List<Lot>> getByUserId(Integer userId){
+        return lotCrudRepository.findByUserId(userId);
+    }
+
+    public Optional<List<Lot>> getByPropietary(Propietary propietary){
+        return lotCrudRepository.findByPropietary(propietary);
     }
 
 }

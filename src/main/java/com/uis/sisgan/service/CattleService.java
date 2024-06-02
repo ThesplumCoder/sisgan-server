@@ -1,13 +1,16 @@
 package com.uis.sisgan.service;
 
 import com.uis.sisgan.persistence.CattleRepository;
+import com.uis.sisgan.persistence.PropietaryRepository;
 import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
+import com.uis.sisgan.persistence.entity.Propietary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CattleService {
@@ -15,6 +18,9 @@ public class CattleService {
     // Repositorio utilizado para acceder y gestionar entidades de Cattle
     @Autowired
     private CattleRepository cattleRepository;
+
+    @Autowired
+    private PropietaryRepository propietaryRepository;
 
     /**
      * Recupera todas las entidades de Cattle.
@@ -58,6 +64,28 @@ public class CattleService {
         }).orElse(false);
     }
 
+    public Cattle patchCattle(Integer id, Cattle cattle){
+        Optional<Cattle> optionalCattle = cattleRepository.getCattle(id);
+        if(optionalCattle.isPresent()){
+            Cattle cattleOp = optionalCattle.get();
+            PatchUtils.copyNonNullProperties(cattle, cattleOp);
+            return cattleRepository.save(cattleOp);
+        }else {
+            throw new RuntimeException("Cattle No found");
+        }
+    }
+
+    public Optional<List<Cattle>> getCattlesByEmail(String email) {
+        Optional<Propietary> user = propietaryRepository.findByEmail(email);
+        if (user.isPresent()) {
+            return Optional.of(user.get().getLots().stream()
+                    .flatMap(lot -> lot.getCattles().stream())
+                    .collect(Collectors.toList()));
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+
     /**
      * Recupera entidades de Cattle por su peso y raza.
      *
@@ -67,5 +95,9 @@ public class CattleService {
      */
     public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed) {
         return cattleRepository.getCattleByWeightAndBreed(weight, breed);
+    }
+
+    public Optional<List<Cattle>> findByLotId(Integer lotId){
+        return cattleRepository.findByLotId(lotId);
     }
 }

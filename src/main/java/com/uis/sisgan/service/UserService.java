@@ -23,6 +23,10 @@ public class UserService {
     public Optional<User> loadUserByUserName(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
     }
+
+    public Optional<User> findByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
     
     /**
      * Gestiona el registro de nuevos usuarios.
