@@ -42,6 +42,7 @@ public class InternalMovementGuideRepository {
     /**
      * Guarda una entidad de InternalMovementGuide en el repositorio.
      *
+
      * @param internalMovementGuide La entidad de InternalMovementGuide a
      *                              guardar.
      * @return La entidad de InternalMovementGuide guardada.
@@ -53,6 +54,7 @@ public class InternalMovementGuideRepository {
     /**
      * Elimina una entidad de InternalMovementGuide por su ID.
      *
+
      * @param internalMovementId El ID de la entidad de InternalMovementGuide a
      *                           eliminar.
      */

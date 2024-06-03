@@ -88,7 +88,6 @@ public class InternalMovementGuideController {
         ResponseEntity<InternalMovementGuide> res;
         Propietary propietary;
         Transporter transporter;
-
         propietary = propietaryService.findByEmail(principal.getName());
         if (propietary == null) {
             res = ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -112,13 +111,13 @@ public class InternalMovementGuideController {
         res = ResponseEntity.created(location).body(savedIntMovementGuide);
         return res;
     }
-    
+
     @PatchMapping
     public ResponseEntity<InternalMovementGuide> update(@RequestBody InternalMovementGuide internalMovementGuide, Principal principal) {
         int amountFields = internalMovementGuide.getClass().getDeclaredFields().length;
         InternalMovementGuide original;
         InternalMovementGuide updated;
-        
+
         if (internalMovementGuide.getId() != null) {
             original = internalMovementGuideService.findById(internalMovementGuide.getId());
         } else {
@@ -129,19 +128,19 @@ public class InternalMovementGuideController {
         if (updated == null) {
             return ResponseEntity.notFound().build();
         }
-        
+
         return ResponseEntity.ok(updated);
     }
-    
+
     @DeleteMapping
     public ResponseEntity<List<InternalMovementGuide>> delete(@RequestBody List<InternalMovementGuide> internalMovementGuides, Principal principal) {
         boolean isDeleted = false;
         ArrayList<Integer> ids = new ArrayList<>();
-        
+
         for (InternalMovementGuide guide : internalMovementGuides) {
             ids.add(guide.getId());
         }
-        
+
         isDeleted = internalMovementGuideService.deleteAllById(ids);
         if (isDeleted) {
             return ResponseEntity.ok().build();

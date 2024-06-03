@@ -3,14 +3,8 @@ package com.uis.sisgan.persistence.entity;
 import java.time.LocalDate;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 /**
  * Un lote es una agrupación de ganado, que pertenece a cierto propietario.
@@ -22,19 +16,23 @@ import jakarta.persistence.Table;
 public class Lot {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "id_user", nullable = false)
+    private Integer userId;
+
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "id_user", insertable = false, updatable = false)
+    @JsonIgnore
     private Propietary propietary;
 
     @ManyToOne
     @JoinColumn(name = "id_internal_movement_guide")
+    @JsonIgnore
     private InternalMovementGuide internalMovementGuide;
 
-    @Column(name = "lot_name", length = 80, nullable = true, unique = true)
+    @Column(name = "lot_name", length = 80,  unique = true)
     private String lotName;
 
     @Column(name = "creation_date", nullable = false)
@@ -43,7 +41,7 @@ public class Lot {
     @Column(name = "last_modification")
     private LocalDate lastModification;
 
-    @OneToMany(mappedBy = "lot")
+    @OneToMany(mappedBy = "lot", cascade = {CascadeType.ALL})
     private List<Cattle> cattles;
 
     /**
@@ -188,5 +186,13 @@ public class Lot {
         if (cattles != null) {
             this.cattles = cattles;
         }
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

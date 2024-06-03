@@ -42,7 +42,6 @@ public class TransporterService {
         res = transporterRepository.findByEmail(email);
         return res;
     }
-
     /**
      * Guarda o actualiza los datos sobre un transportador.
      *

@@ -3,9 +3,9 @@ package com.uis.sisgan.persistence;
 import com.uis.sisgan.persistence.entity.Transporter;
 import com.uis.sisgan.persistence.crud.TransporterCrudRepository;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +28,6 @@ public class TransporterRepository {
      */
     public Transporter findById(Integer id) {
         Optional<Transporter> transporter = transporterCrudRepository.findById(id);
-
         if (transporter.isPresent()) {
             return transporter.get();
         } else {

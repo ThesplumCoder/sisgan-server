@@ -1,6 +1,9 @@
 package com.uis.sisgan.service;
 import com.uis.sisgan.persistence.LotRepository;
+import com.uis.sisgan.persistence.PropietaryRepository;
+import com.uis.sisgan.persistence.entity.Cattle;
 import com.uis.sisgan.persistence.entity.Lot;
+import com.uis.sisgan.persistence.entity.Propietary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,8 @@ public class LotService {
     @Autowired
     private LotRepository lotRepository;
 
+    @Autowired
+    private PropietaryRepository propietaryRepository;
     /**
      * Recupera todas las entidades de Lot.
      *
@@ -54,5 +59,35 @@ public class LotService {
             lotRepository.delete(lotId);
             return true;
         }).orElse(false);
+    }
+
+    public Optional<List<Lot>> getByUser(Integer id){
+        return lotRepository.getByUserId(id);
+    }
+
+    public Optional<List<Lot>> getByPropietary(Integer id){
+        return propietaryRepository.getById(id).map(
+                propietary -> lotRepository.getByPropietary(propietary))
+                .orElse(null);
+    }
+
+    public Lot patchCattle(Integer id, Lot lot){
+        Optional<Lot> optionalLot = lotRepository.getLot(id);
+        if(optionalLot.isPresent()){
+            Lot lotOp = optionalLot.get();
+            PatchUtils.copyNonNullProperties(lot, lotOp);
+            return lotRepository.save(lotOp);
+        }else {
+            throw new RuntimeException("Lot No found");
+        }
+    }
+
+    public Optional<List<Lot>> getLotByEmail(String email) {
+        Optional<Propietary> propietary = propietaryRepository.findByEmail(email);
+        if (propietary.isPresent()) {
+            return Optional.ofNullable(propietary.get().getLots());
+        } else {
+            throw new RuntimeException("User not found");
+        }
     }
 }

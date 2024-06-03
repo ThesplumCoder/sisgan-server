@@ -23,7 +23,8 @@ public class InternalMovementGuide {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_user_transporter")
+    @JoinColumn(name = "id_user_transporter", insertable = false, updatable = false)
+    @JsonIgnore
     private Transporter transporter;
 
     @Column(name ="vehicle_plate", length = 10)

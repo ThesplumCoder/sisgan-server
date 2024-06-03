@@ -63,4 +63,9 @@ public class CattleRepository {
     public Optional<List<Cattle>> getCattleByWeightAndBreed(float weight, String breed) {
         return cattleCrudRepository.findByWeightLessThanAndBreed(weight, breed);
     }
+
+
+    public Optional<List<Cattle>> findByLotId(Integer lotId){
+        return cattleCrudRepository.findByLotId(lotId);
+    }
 }

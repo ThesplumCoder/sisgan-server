@@ -35,7 +35,7 @@ public class PropietaryService {
             return null;
         }
     }
-    
+
     /**
      * Devuelve el propietario que tiene el correo electrónico suministrado.
      *
@@ -45,7 +45,7 @@ public class PropietaryService {
      */
     public Propietary findByEmail(String email) {
         Optional<Propietary> propietary = propietaryRepository.findByEmail(email);
-        
+
         if (propietary.isPresent()) {
             return propietary.get();
         } else {
