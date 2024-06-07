@@ -167,12 +167,7 @@ public class Cattle {
      * @param sex Texto que define el sexo del bovino, puede ser "M" o "F".
      */
     public void setSex(String sex) {
-        if (sex != null) {
-            sex = sex.toUpperCase();
-            if (sex == "M" || sex == "F") {
-                this.sex = sex;
-            }
-        }
+        this.sex = sex;
     }
     
     /**
