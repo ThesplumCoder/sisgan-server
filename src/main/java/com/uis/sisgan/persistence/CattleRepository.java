@@ -2,12 +2,12 @@ package com.uis.sisgan.persistence;
 
 import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
-import com.uis.sisgan.service.CattleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class CattleRepository {
@@ -30,8 +30,13 @@ public class CattleRepository {
      * @param cattleId El ID de la entidad de Cattle a recuperar.
      * @return Optional<Cattle> Un Optional que contiene la entidad de Cattle si se encuentra, o vacío si no se encuentra.
      */
-    public Optional<Cattle> getCattle(int cattleId) {
+    public Optional<Cattle> getCattle(Integer cattleId) {
         return cattleCrudRepository.findById(cattleId);
+    }
+
+    public Optional<List<Cattle>> getCattlesByIds(List<Integer> cattlesId) {
+        List<Cattle> cattles = (List<Cattle>) cattleCrudRepository.findAllById(cattlesId);
+        return cattles.isEmpty() ? Optional.empty() : Optional.of(cattles);
     }
 
     /**
@@ -47,10 +52,11 @@ public class CattleRepository {
     /**
      * Elimina una entidad de Cattle por su ID.
      *
-     * @param cattleId El ID de la entidad de Cattle a eliminar.
+     * @param cattles El ID de la entidad de Cattle a eliminar.
      */
-    public void delete(int cattleId) {
-        cattleCrudRepository.deleteById(cattleId);
+    public void deleteAll(List<Cattle> cattles) {
+        List<Integer> cattlesId = cattles.stream().map(Cattle::getId).collect(Collectors.toList());
+        cattleCrudRepository.deleteAllById(cattlesId);
     }
 
     /**

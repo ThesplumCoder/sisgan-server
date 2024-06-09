@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(
                 request -> request
-                    .requestMatchers("/propietary/**", "/transporter/**", "/ica-official/**", "/health/**").permitAll()
+                    .requestMatchers("/propietary/**", "/transporter/**", "/ica-official/**", "/health/**","/sign-up/**").permitAll()
                     .requestMatchers("/**").authenticated()
             )
             .httpBasic(Customizer.withDefaults())

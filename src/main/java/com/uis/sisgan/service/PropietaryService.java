@@ -62,4 +62,5 @@ public class PropietaryService {
     public Propietary save(Propietary propietary) {
         return propietaryRepository.save(propietary);
     }
+
 }

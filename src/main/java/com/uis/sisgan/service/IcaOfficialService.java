@@ -40,8 +40,7 @@ public class IcaOfficialService {
      *         en caso contrario se retorna nulo.
      */
     public IcaOfficial save(IcaOfficial icaOfficial) {
-        IcaOfficial saved = icaOfficialRepository.save(icaOfficial);
 
-        return saved;
+        return icaOfficialRepository.save(icaOfficial);
     }
 }
