@@ -2,7 +2,6 @@ package com.uis.sisgan.service;
 
 import com.uis.sisgan.persistence.CattleRepository;
 import com.uis.sisgan.persistence.PropietaryRepository;
-import com.uis.sisgan.persistence.crud.CattleCrudRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
 import com.uis.sisgan.persistence.entity.Propietary;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +36,12 @@ public class CattleService {
      * @param cattleId El ID de la entidad de Cattle a recuperar.
      * @return Optional<Cattle> Un Optional que contiene la entidad de Cattle si se encuentra, o vacío si no se encuentra.
      */
-    public Optional<Cattle> getCattle(int cattleId) {
+    public Optional<Cattle> getCattle(Integer cattleId) {
         return cattleRepository.getCattle(cattleId);
+    }
+
+    public Optional<List<Cattle>> getCattles(List<Integer> cattlesId) {
+        return  cattleRepository.getCattlesByIds(cattlesId);
     }
 
     /**
@@ -54,12 +57,15 @@ public class CattleService {
     /**
      * Elimina una entidad de Cattle por su ID si existe.
      *
-     * @param cattleId El ID de la entidad de Cattle a eliminar.
+     * @param cattlesId El ID de la entidad de Cattle a eliminar.
      * @return boolean true si la entidad de Cattle fue encontrada y eliminada, false en caso contrario.
      */
-    public boolean delete(int cattleId) {
-        return getCattle(cattleId).map(cattle -> {
-            cattleRepository.delete(cattleId);
+    public boolean deleteAll(List<Integer> cattlesId) {
+        return getCattles(cattlesId).map(cattles -> {
+            if (cattles.isEmpty()) {
+                return false;
+            }
+            cattleRepository.deleteAll(cattles);
             return true;
         }).orElse(false);
     }

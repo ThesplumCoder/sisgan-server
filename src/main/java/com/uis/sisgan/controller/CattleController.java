@@ -3,6 +3,7 @@ package com.uis.sisgan.controller;
 import com.uis.sisgan.persistence.PropietaryRepository;
 import com.uis.sisgan.persistence.UserRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
+import com.uis.sisgan.persistence.entity.InternalMovementGuide;
 import com.uis.sisgan.persistence.entity.Propietary;
 import com.uis.sisgan.persistence.entity.User;
 import com.uis.sisgan.service.CattleService;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -50,9 +52,13 @@ public class CattleController {
         return new ResponseEntity<>(cattleService.patchCattle(id,cattle), HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") Integer id){
-            if (cattleService.delete(id)) {
+    @DeleteMapping("/delete")
+    public ResponseEntity delete(@RequestBody List<Cattle> cattles){
+        ArrayList<Integer> ids= new ArrayList<>();
+        for (Cattle cattle: cattles) {
+            ids.add(cattle.getId());
+        }
+            if (cattleService.deleteAll(ids)) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
