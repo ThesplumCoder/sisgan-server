@@ -32,6 +32,7 @@ public class LotController {
     }
     @GetMapping("/all")
     public ResponseEntity<List<Lot>> getAll(){
+
         return new ResponseEntity<>(lotService.getAll(), HttpStatus.OK);
     }
 

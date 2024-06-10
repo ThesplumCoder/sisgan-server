@@ -4,6 +4,7 @@ import com.uis.sisgan.persistence.entity.*;
 import com.uis.sisgan.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,9 @@ public class UserController {
     private RegistrationService registrationService;
 
     @PostMapping
-    public ResponseEntity<UserRegistrationRequest> registerUser(@RequestBody UserRegistrationRequest request) {
+    public ResponseEntity<?> registerUser(@RequestBody UserRegistrationRequest request) {
         Object response = registrationService.registerUser(request);
-        return ResponseEntity.ok((UserRegistrationRequest) response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
 
