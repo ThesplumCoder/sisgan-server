@@ -11,7 +11,7 @@
 	<groupId>com.uis</groupId>
 	<artifactId>sisgan</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>sisgan</name>
 	<description>Servidor web RESTful para el Sistema de Gestión Integral de Ganado. </description>
     <properties>
