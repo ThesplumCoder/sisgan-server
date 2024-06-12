@@ -14,12 +14,12 @@
 	<packaging>jar</packaging>
 	<name>sisgan</name>
 	<description>Servidor web RESTful para el Sistema de Gestión Integral de Ganado. </description>
-    <properties>
-        <java.version>22</java.version>
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
-    </properties>
+	<properties>
+		<java.version>21</java.version> <!-- Cambiado a 21 -->
+		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+		<maven.compiler.source>21</maven.compiler.source> <!-- Cambiado a 21 -->
+		<maven.compiler.target>21</maven.compiler.target> <!-- Cambiado a 21 -->
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
