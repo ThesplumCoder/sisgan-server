@@ -4,7 +4,7 @@ package com.uis.sisgan.service;
 import com.uis.sisgan.persistence.entity.IcaOfficial;
 import com.uis.sisgan.persistence.entity.Propietary;
 import com.uis.sisgan.persistence.entity.Transporter;
-import com.uis.sisgan.persistence.entity.UserRegistrationRequest;
+import com.uis.sisgan.DTO.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
