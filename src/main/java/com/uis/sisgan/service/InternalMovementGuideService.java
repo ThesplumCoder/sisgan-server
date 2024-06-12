@@ -53,6 +53,10 @@ public class InternalMovementGuideService {
         return null;
     }
 
+    public List<InternalMovementGuide> getAll(){
+        return (List<InternalMovementGuide>) internalMovementGuideRepository.getAll();
+    }
+
     /**
      * Guarda una guía de movimiento interno en el repositorio.
      *

@@ -26,6 +26,11 @@ public class InternalMovementGuideRepository {
         return internalMovementCrudRepository.findByTransporter(transporter);
     }
 
+
+    public List<InternalMovementGuide> getAll(){
+        return (List<InternalMovementGuide>) internalMovementCrudRepository.findAll();
+    }
+
     /**
      * Recupera una entidad de InternalMovementGuide por su ID.
      *

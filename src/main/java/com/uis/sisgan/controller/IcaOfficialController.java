@@ -1,10 +1,16 @@
 package com.uis.sisgan.controller;
 
+import com.uis.sisgan.persistence.InternalMovementGuideRepository;
 import com.uis.sisgan.persistence.entity.IcaOfficial;
+import com.uis.sisgan.persistence.entity.InternalMovementGuide;
 import com.uis.sisgan.service.IcaOfficialService;
 import java.net.URI;
 import java.security.Principal;
+import java.util.List;
+
+import com.uis.sisgan.service.InternalMovementGuideService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +28,10 @@ public class IcaOfficialController {
     
     @Autowired
     private IcaOfficialService icaOfficialService;
+
+
+    @Autowired
+    private InternalMovementGuideService internalMovementGuideService;
     
     @GetMapping()
     public ResponseEntity<IcaOfficial> getInfo(Principal principal) {
@@ -49,4 +59,11 @@ public class IcaOfficialController {
         ResponseEntity<IcaOfficial> res = ResponseEntity.created(location).body(savedIcaOfficial);
         return res;
     }
+
+    @GetMapping("/movements")
+    public ResponseEntity<List<InternalMovementGuide>> getAllMovements(){
+       return new ResponseEntity<>(internalMovementGuideService.getAll(), HttpStatus.OK);
+    }
+
+
 }
