@@ -71,7 +71,7 @@ public class LotService {
                 .orElse(null);
     }
 
-    public Lot patchCattle(Integer id, Lot lot){
+    public Lot patchLot(Integer id, Lot lot){
         Optional<Lot> optionalLot = lotRepository.getLot(id);
         if(optionalLot.isPresent()){
             Lot lotOp = optionalLot.get();

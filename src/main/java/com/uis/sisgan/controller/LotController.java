@@ -56,7 +56,7 @@ public class LotController {
 
     @PatchMapping("/patch/{id}")
     public ResponseEntity patch(@PathVariable("id") Integer id, @RequestBody Lot lot){
-        return new ResponseEntity<>(lotService.patchCattle(id,lot),HttpStatus.OK);
+        return new ResponseEntity<>(lotService.patchLot(id,lot),HttpStatus.OK);
     }
 
     private String extractEmailFromAuthorizationHeader(String authorizationHeader) {

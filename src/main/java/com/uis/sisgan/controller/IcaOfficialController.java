@@ -3,12 +3,16 @@ package com.uis.sisgan.controller;
 import com.uis.sisgan.persistence.InternalMovementGuideRepository;
 import com.uis.sisgan.persistence.entity.IcaOfficial;
 import com.uis.sisgan.persistence.entity.InternalMovementGuide;
+import com.uis.sisgan.persistence.entity.Lot;
+import com.uis.sisgan.persistence.entity.Propietary;
 import com.uis.sisgan.service.IcaOfficialService;
 import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 
 import com.uis.sisgan.service.InternalMovementGuideService;
+import com.uis.sisgan.service.LotService;
+import com.uis.sisgan.service.PropietaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +36,12 @@ public class IcaOfficialController {
 
     @Autowired
     private InternalMovementGuideService internalMovementGuideService;
+
+    @Autowired
+    private LotService lotService;
+
+    @Autowired
+    private PropietaryService propietaryService;
     
     @GetMapping()
     public ResponseEntity<IcaOfficial> getInfo(Principal principal) {
@@ -63,6 +73,16 @@ public class IcaOfficialController {
     @GetMapping("/movements")
     public ResponseEntity<List<InternalMovementGuide>> getAllMovements(){
        return new ResponseEntity<>(internalMovementGuideService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/lots")
+    public ResponseEntity<List<Lot>> getAllLots(){
+        return new ResponseEntity<>(lotService.getAll(),HttpStatus.OK);
+    }
+
+    @GetMapping("/propietaries")
+    public ResponseEntity<List<Propietary>> getAllPropietaries(){
+        return new ResponseEntity<>(propietaryService.getAll(),HttpStatus.OK);
     }
 
 

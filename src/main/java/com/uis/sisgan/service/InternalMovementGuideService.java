@@ -3,6 +3,7 @@ package com.uis.sisgan.service;
 import com.uis.sisgan.persistence.InternalMovementGuideRepository;
 import com.uis.sisgan.persistence.TransporterRepository;
 import com.uis.sisgan.persistence.entity.InternalMovementGuide;
+import com.uis.sisgan.persistence.entity.Lot;
 import com.uis.sisgan.persistence.entity.Transporter;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,5 +97,16 @@ public class InternalMovementGuideService {
      */
     public boolean deleteAllById(List<Integer> ids) {
         return internalMovementGuideRepository.deleteAllById(ids);
+    }
+
+    public InternalMovementGuide patchMovement(Integer id, InternalMovementGuide internalMovementGuide){
+        Optional<InternalMovementGuide> optionalInternalMovementGuide = internalMovementGuideRepository.getInternalMovementGuideById(id);
+        if(optionalInternalMovementGuide.isPresent()){
+            InternalMovementGuide internalMovementGuideOp = optionalInternalMovementGuide.get();
+            PatchUtils.copyNonNullProperties(internalMovementGuide, internalMovementGuideOp);
+            return internalMovementGuideRepository.save(internalMovementGuideOp);
+        }else {
+            throw new RuntimeException("Internal Movement No found");
+        }
     }
 }
