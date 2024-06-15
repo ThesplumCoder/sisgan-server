@@ -30,7 +30,7 @@ public class UserController {
 
 
     private RegistrationService registrationService;
-
+  
     private PasswordEncoder passwordEncoder;
 
     private JWTGenerator jwtGenerator;
@@ -70,10 +70,6 @@ public class UserController {
         String role = String.valueOf(user.getRole());
         return new ResponseEntity<>(new AuthResponse(token,role),HttpStatus.OK);
     }
-
-
-
-
 
 
 }
