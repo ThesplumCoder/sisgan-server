@@ -6,6 +6,7 @@ import com.uis.sisgan.persistence.entity.Cattle;
 import com.uis.sisgan.persistence.entity.InternalMovementGuide;
 import com.uis.sisgan.persistence.entity.Propietary;
 import com.uis.sisgan.persistence.entity.User;
+import com.uis.sisgan.security.JWTUtils;
 import com.uis.sisgan.service.CattleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,14 +23,17 @@ import java.util.Optional;
 public class CattleController {
 
     @Autowired
-    CattleService cattleService;
+    private CattleService cattleService;
 
     @Autowired
-    PropietaryRepository propietaryRepository;
+    private PropietaryRepository propietaryRepository;
+
+    @Autowired
+    private JWTUtils jwtUtils;
 
     @GetMapping()
     public ResponseEntity<List<Cattle>> getCattlesByEmail(@RequestHeader("Authorization") String authorizationHeader){
-        String email = extractEmailFromAuthorizationHeader(authorizationHeader);
+        String email = jwtUtils.extractEmailFromToken(authorizationHeader);
         return cattleService.getCattlesByEmail(email).map(
                         cattles -> new ResponseEntity<>(cattles, HttpStatus.OK)).
                 orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));

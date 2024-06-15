@@ -12,7 +12,7 @@ import org.hibernate.annotations.DiscriminatorFormula;
         + "WHEN id_card_ica IS NOT NULL THEN 'IcaOfficial' "
         + "WHEN id_card_ica IS NULL AND id_driving_license IS NOT NULL THEN 'Transporter' "
         + "ELSE 'Propietary' END")
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

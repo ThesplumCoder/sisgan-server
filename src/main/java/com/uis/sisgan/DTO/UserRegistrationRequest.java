@@ -1,7 +1,6 @@
-package com.uis.sisgan.persistence.entity;
+package com.uis.sisgan.DTO;
 
-import jakarta.persistence.*;
-
+import com.uis.sisgan.persistence.entity.Role;
 import java.time.LocalDate;
 
 public class UserRegistrationRequest {

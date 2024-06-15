@@ -63,4 +63,9 @@ public class PropietaryService {
         return propietaryRepository.save(propietary);
     }
 
+
+    public List<Propietary> getAll(){
+        return propietaryRepository.getAll();
+    }
+
 }

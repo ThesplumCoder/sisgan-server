@@ -4,6 +4,7 @@ package com.uis.sisgan.controller;
 import com.uis.sisgan.persistence.PropietaryRepository;
 import com.uis.sisgan.persistence.entity.Cattle;
 import com.uis.sisgan.persistence.entity.Lot;
+import com.uis.sisgan.security.JWTUtils;
 import com.uis.sisgan.service.CattleService;
 import com.uis.sisgan.service.LotService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,13 @@ public class LotController {
     @Autowired
     private LotService lotService;
 
+    @Autowired
+    private JWTUtils jwtUtils;
+
 
     @GetMapping()
     public ResponseEntity<List<Lot>> getLotByEmail(@RequestHeader("Authorization") String authorizationHeader){
-        String email = extractEmailFromAuthorizationHeader(authorizationHeader);
+        String email = jwtUtils.extractEmailFromToken(authorizationHeader);
         return lotService.getLotByEmail(email).map(
                         lots -> new ResponseEntity<>(lots, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -52,7 +56,7 @@ public class LotController {
 
     @PatchMapping("/patch/{id}")
     public ResponseEntity patch(@PathVariable("id") Integer id, @RequestBody Lot lot){
-        return new ResponseEntity<>(lotService.patchCattle(id,lot),HttpStatus.OK);
+        return new ResponseEntity<>(lotService.patchLot(id,lot),HttpStatus.OK);
     }
 
     private String extractEmailFromAuthorizationHeader(String authorizationHeader) {
