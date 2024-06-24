@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Base64;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/lots")
 @RestController
 public class LotController {
